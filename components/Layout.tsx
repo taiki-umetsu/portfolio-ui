@@ -69,9 +69,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         minH="100vh"
         display="flex"
         flexDirection="column"
-        py={8}
+        p={3}
         mx="auto"
-        maxW="6xl"
+        maxW="3xl"
       >
         {children}
       </Box>
