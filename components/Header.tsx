@@ -82,6 +82,7 @@ const Header: FC = () => {
           <Text
             ml={2}
             fontSize="md"
+            fontWeight="500"
             color={textColor}
             _hover={{ color: hoverColor }}
           >
