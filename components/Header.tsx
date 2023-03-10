@@ -63,15 +63,11 @@ const Header: FC = () => {
     <Flex
       as="header"
       backgroundColor="transparent"
-      backdropFilter="blur(50px)"
+      backdropFilter="blur(10px)"
       alignItems="center"
-      px={4}
-      py={2}
       position="fixed"
-      top="0"
-      left="0"
-      right="0"
       zIndex="999"
+      w="100%"
     >
       <ChakraLink href="/" _hover={{ textDecoration: "none" }}>
         <Flex alignItems="center">
@@ -82,11 +78,11 @@ const Header: FC = () => {
             borderRadius="full"
             objectFit="cover"
             objectPosition="center"
-            _hover={{ color: hoverColor }}
           />
           <Text
             ml={2}
             fontSize="md"
+            fontWeight="500"
             color={textColor}
             _hover={{ color: hoverColor }}
           >
@@ -106,7 +102,11 @@ const Header: FC = () => {
           _hover={{ color: hoverColor }}
           ml={2}
         >
-          {isMenuOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          {isMenuOpen ? (
+            <ChevronUpIcon boxSize={6} />
+          ) : (
+            <ChevronDownIcon boxSize={6} />
+          )}
         </MenuButton>
         <MenuList>
           <Link href="/about">
