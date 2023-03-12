@@ -1,4 +1,5 @@
 import {
+  Box,
   Flex,
   Image,
   Link as ChakraLink,
@@ -22,6 +23,8 @@ import {
 } from "react-icons/fa";
 import { menuAnatomy } from "@chakra-ui/anatomy";
 
+const textColor = "#80f2e0";
+const hoverColor = "gray.300";
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(menuAnatomy.keys);
 const baseStyle = definePartsStyle({
@@ -30,27 +33,25 @@ const baseStyle = definePartsStyle({
     // this will style the MenuList component
     py: "4",
     borderRadius: "xl",
-    border: "2px",
-    bg: "#2b3047",
+    border: "1px",
+    borderColor: "#8ac8fe",
+    bg: "black",
     minW: "0",
     w: "160px",
   },
   item: {
     // this will style the MenuItem and MenuItemOption components
-    color: "white",
+    color: textColor,
     _hover: {
       bg: "#1a1e2e",
     },
     _focus: {
       bg: "#1a1e2e",
     },
-    bg: "#2b3047",
+    bg: "black",
   },
 });
 export const menuTheme = defineMultiStyleConfig({ baseStyle });
-
-const textColor = "white";
-const hoverColor = "gray.300";
 
 const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,23 +63,36 @@ const Header: FC = () => {
   return (
     <Flex
       as="header"
-      backgroundColor="transparent"
-      backdropFilter="blur(10px)"
+      backgroundImage="linear-gradient(#000,transparent)"
       alignItems="center"
       position="fixed"
+      top="0"
       zIndex="999"
       w="100%"
+      h="90px"
+      p="3"
     >
       <ChakraLink href="/" _hover={{ textDecoration: "none" }}>
         <Flex alignItems="center">
-          <Image
-            src="/images/top-icon.jpg"
-            alt="icon"
-            boxSize="60px"
-            borderRadius="full"
-            objectFit="cover"
-            objectPosition="center"
-          />
+          <Box
+            w="70px"
+            h="70px"
+            borderRadius="50%"
+            borderWidth="1px"
+            borderColor="#8ac8fe"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Image
+              src="/images/top-icon.jpg"
+              alt="icon"
+              boxSize="60px"
+              borderRadius="full"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </Box>
           <Text
             ml={2}
             fontSize="md"

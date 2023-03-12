@@ -1,14 +1,14 @@
 import React from "react";
-import { Heading, Text, Link as ChakraLink, Box } from "@chakra-ui/react";
-import Layout from "../components/Layout";
-import Link from "next/link";
+import { Text, Link as ChakraLink, Box } from "@chakra-ui/react";
+import Layout from "@/components/Layout";
 
 const IndexPage: React.FC = () => {
   return (
     <Layout>
       <Box>
         <Text textStyle="p">
-          I am a Backend developer with 2+ years of experience in Ruby on Rails.
+          I&apos;m a Backend developer with 2+ years of experience in Ruby on
+          Rails. &#128512;
         </Text>
         <ChakraLink
           href="/about"
