@@ -1,8 +1,27 @@
 import React from "react";
 import { Text, Link as ChakraLink, Box } from "@chakra-ui/react";
 import Layout from "@/components/Layout";
+import Timeline from "@/components/Timeline";
+import { GetStaticProps } from "next";
+import { Experience, getLinkedinExperience } from "@/lib/linkedin";
 
-const IndexPage: React.FC = () => {
+export const getStaticProps: GetStaticProps<{
+  experiences: Experience[];
+}> = async () => {
+  const experiences = await getLinkedinExperience();
+
+  return {
+    props: {
+      experiences,
+    },
+  };
+};
+
+interface Props {
+  experiences: Experience[];
+}
+
+const IndexPage: React.FC<Props> = ({ experiences }) => {
   return (
     <Layout>
       <Box>
@@ -22,6 +41,10 @@ const IndexPage: React.FC = () => {
             </Text>
           </Text>
         </ChakraLink>
+        <div>
+          <h1>My LinkedIn Experience</h1>
+          <ul></ul>
+        </div>
       </Box>
     </Layout>
   );
