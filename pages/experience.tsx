@@ -112,7 +112,7 @@ const Experience = () => {
         <Text textStyle="p">
           The avatar is generated using a face texture mapping, which is
           replaced by an uploaded image. To create a realistic avatar, the
-          model's eye and nose coordinates are aligned with those of the
+          model&apos;s eye and nose coordinates are aligned with those of the
           uploaded image, using vectors and matrices to perform coordinate
           calculations. The following is the 3D avatar generation process I have
           made:
