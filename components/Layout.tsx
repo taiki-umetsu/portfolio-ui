@@ -43,16 +43,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             textDecoration: "none",
           },
         },
-        h1: {
+        "h1.chakra-heading": {
           fontSize: { base: "4xl", md: "4xl" },
           fontWeight: "700",
           lineHeight: "1.4",
           mb: 8,
         },
-        h2: {
+        "h2.chakra-heading": {
           fontSize: { base: "2xl", md: "2xl" },
           fontWeight: "700",
           lineHeight: "1.4",
+          mb: 3,
         },
       },
     },
@@ -94,7 +95,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         position="relative"
         my="90px"
       >
-        <Box p={3} mx="auto" maxW="3xl" h="calc(100vh - (90px + 90px))">
+        <Box p={3} mx="auto" maxW="3xl">
           {children}
         </Box>
         <Footer />

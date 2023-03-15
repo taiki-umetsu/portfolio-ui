@@ -11,7 +11,7 @@ const IndexPage: React.FC = () => {
           Rails. &#128512;
         </Text>
         <ChakraLink
-          href="/about"
+          href="/experience"
           _hover={{ textDecoration: "none" }}
           style={{ color: "white" }}
         >

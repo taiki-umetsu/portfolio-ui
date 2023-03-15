@@ -30,6 +30,7 @@ const Spinner: React.FC = () => {
       top="calc(50% - 50%/2)"
       left={leftValue}
       maxW="3xl"
+      maxH="xl"
     />
   );
 };

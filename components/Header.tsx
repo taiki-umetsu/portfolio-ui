@@ -123,27 +123,19 @@ const Header: FC = () => {
           )}
         </MenuButton>
         <MenuList>
-          <Link href="/about">
+          <Link href="/">
             <MenuItem>
               <Flex alignItems="center">
                 <FaInfoCircle size={20} style={{ marginRight: "0.5rem" }} />
-                About
+                Home
               </Flex>
             </MenuItem>
           </Link>
-          <Link href="/experiences">
+          <Link href="/experience">
             <MenuItem>
               <Flex alignItems="center">
                 <FaBriefcase size={20} style={{ marginRight: "0.5rem" }} />
-                Experiences
-              </Flex>
-            </MenuItem>
-          </Link>
-          <Link href="/projects">
-            <MenuItem>
-              <Flex alignItems="center">
-                <FaCode size={20} style={{ marginRight: "0.5rem" }} />
-                Projects
+                Experience
               </Flex>
             </MenuItem>
           </Link>
@@ -168,18 +160,6 @@ const Header: FC = () => {
               <Flex alignItems="center">
                 <FaLinkedin size={20} style={{ marginRight: "0.5rem" }} />
                 LinkedIn
-              </Flex>
-            </MenuItem>
-          </ChakraLink>
-          <ChakraLink
-            href="/resume.pdf"
-            download
-            _hover={{ textDecoration: "none" }}
-          >
-            <MenuItem>
-              <Flex alignItems="center">
-                <FaFilePdf size={20} style={{ marginRight: "0.5rem" }} />
-                Resume
               </Flex>
             </MenuItem>
           </ChakraLink>

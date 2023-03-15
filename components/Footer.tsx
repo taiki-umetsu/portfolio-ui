@@ -7,6 +7,7 @@ const Footer: React.FC = () => (
     as="footer"
     h="90px"
     px="3"
+    mt="10"
     borderTop="1px solid"
     borderTopColor="#80f2e0"
     color="#8ac8fe"
@@ -32,13 +33,6 @@ const Footer: React.FC = () => (
           marginLeft={{ base: "0", md: "1rem" }}
         >
           <FaLinkedin size={20} style={{ marginRight: "0.5rem" }} />
-        </ChakraLink>
-        <ChakraLink
-          href="/resume.pdf"
-          download
-          marginLeft={{ base: "0", md: "1rem" }}
-        >
-          <FaFilePdf size={20} style={{ marginRight: "0.5rem" }} />
         </ChakraLink>
       </Flex>
     </Flex>
