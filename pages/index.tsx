@@ -63,8 +63,8 @@ const IndexPage: React.FC = () => {
             "code reviews",
           ]}
         />
-        <Heading as="h2">Learning...</Heading>
-        <SkillsSection skills={["Go", "React", "Next.js"]} />
+        <Heading as="h2">Trying...</Heading>
+        <SkillsSection skills={["Go", "React", "Next.js", "ChatGPT"]} />
       </Box>
     </Layout>
   );
