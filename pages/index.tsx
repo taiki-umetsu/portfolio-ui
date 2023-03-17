@@ -8,13 +8,14 @@ import {
 } from "@chakra-ui/react";
 import Layout from "@/components/Layout";
 import SkillsSection from "@/components/SkillsSection";
+import ContactForm from "@/components/ContactForm";
 
 const IndexPage: React.FC = () => {
   return (
     <Layout>
       <Box mb="10">
         <VStack align="start" textStyle="p">
-          <Heading as="h1">Hi, I&apos;m Taiki Umetsu &#128075;</Heading>
+          <Heading as="h1">Hi, I&apos;m Taiki &#128075;</Heading>
 
           <Text pb="5">
             A dedicated backend developer with over 2 years of experience and a
@@ -66,6 +67,7 @@ const IndexPage: React.FC = () => {
         <Heading as="h2">Learning...</Heading>
         <SkillsSection skills={["Go", "React", "Next.js", "ChatGPT"]} />
       </Box>
+      <ContactForm />
     </Layout>
   );
 };
