@@ -16,10 +16,8 @@ import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   FaGithub,
   FaLinkedin,
-  FaFilePdf,
   FaInfoCircle,
   FaBriefcase,
-  FaCode,
 } from "react-icons/fa";
 import { menuAnatomy } from "@chakra-ui/anatomy";
 
@@ -127,7 +125,7 @@ const Header: FC = () => {
             <MenuItem>
               <Flex alignItems="center">
                 <FaInfoCircle size={20} style={{ marginRight: "0.5rem" }} />
-                Home
+                Top
               </Flex>
             </MenuItem>
           </Link>
