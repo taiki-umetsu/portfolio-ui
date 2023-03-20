@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   Heading,
   Box,
@@ -11,22 +10,15 @@ import {
   VStack,
   FormErrorMessage,
   useBreakpointValue,
+  Center,
 } from "@chakra-ui/react";
 import SentMessageModal from "./SentMessageModal";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_SITE_KEY = "6Le9-hYlAAAAAHFwlXJ7nKVqG8cM95b8CizeCl6j";
 
 const ContactForm: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setName("");
-    setEmail("");
-    setMessage("");
-    setIsValidName(false);
-    setIsValidEmail(false);
-    setIsValidMessage(false);
-  };
-  const [isConfetti, setIsConfetti] = useState(false);
-
+  // form validation
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -37,35 +29,6 @@ const ContactForm: React.FC = () => {
   const MAX_EMAIL_LENGTH = 254;
   const MAX_NAME_LENGTH = 50;
   const MAX_MESSAGE_LENGTH = 2000;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      if (response.ok) {
-        setIsLoading(false);
-        setIsConfetti(true);
-        setIsModalOpen(true);
-      } else {
-        setIsLoading(false);
-        alert("Failed to send the message. Please try again.");
-      }
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      alert("A communication error occurred. Please try again.");
-    }
-  };
-
-  const buttonWidth = useBreakpointValue({ base: "full", md: "200px" });
-
   useEffect(() => {
     setIsValidName(name.trim().length <= MAX_NAME_LENGTH);
   }, [name]);
@@ -78,6 +41,57 @@ const ContactForm: React.FC = () => {
   useEffect(() => {
     setIsValidMessage(message.trim().length <= MAX_MESSAGE_LENGTH);
   }, [message]);
+
+  // reCAPTCHA
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
+  };
+  const recaptchaRef = React.createRef<ReCAPTCHA>();
+
+  // modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setName("");
+    setEmail("");
+    setMessage("");
+    setIsValidName(false);
+    setIsValidEmail(false);
+    setIsValidMessage(false);
+    recaptchaRef.current?.reset();
+  };
+  const [isConfetti, setIsConfetti] = useState(false);
+
+  // form submitting
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, recaptchaValue }),
+      });
+
+      if (response.ok) {
+        setIsLoading(false);
+        setIsConfetti(true);
+        setIsModalOpen(true);
+      } else {
+        setIsLoading(false);
+        const responseData = await response.json();
+        alert(`Failed to send the message. ${responseData.message}`);
+      }
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      alert("A communication error occurred. Please try again.");
+    }
+  };
+
+  const buttonWidth = useBreakpointValue({ base: "full", md: "200px" });
 
   return (
     <>
@@ -151,6 +165,19 @@ const ContactForm: React.FC = () => {
               Please enter your input within {MAX_MESSAGE_LENGTH} characters.
             </FormErrorMessage>
           </FormControl>
+
+          <Center>
+            <FormControl id="recaptcha" isRequired>
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={handleRecaptchaChange}
+                theme="dark"
+                size="normal"
+                hl="en"
+                ref={recaptchaRef}
+              />
+            </FormControl>
+          </Center>
 
           <Button
             type="submit"
