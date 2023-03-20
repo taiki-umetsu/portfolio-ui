@@ -63,7 +63,7 @@ const SentMessageModal: React.FC<SentMessageModalProps> = ({
           <ModalHeader textAlign="center" fontSize={{ base: "lg", md: "xl" }}>
             Thank you &#127881;
             <br />
-            for sending the message.
+            for contacting me
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody fontSize={{ base: "sm", md: "lg" }}>

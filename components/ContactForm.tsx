@@ -42,12 +42,26 @@ const ContactForm: React.FC = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // TODO: form submitting
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        setIsLoading(false);
+        setIsConfetti(true);
+        setIsModalOpen(true);
+      } else {
+        setIsLoading(false);
+        alert("Failed to send the message. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
       setIsLoading(false);
-      setIsConfetti(true);
-      setIsModalOpen(true);
-    }, 1000);
+      alert("A communication error occurred. Please try again.");
+    }
   };
 
   const buttonWidth = useBreakpointValue({ base: "full", md: "200px" });
