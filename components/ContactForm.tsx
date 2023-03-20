@@ -47,6 +47,7 @@ const ContactForm: React.FC = () => {
   const handleRecaptchaChange = (value: string | null) => {
     setRecaptchaValue(value);
   };
+  const recaptchaRef = React.createRef<ReCAPTCHA>();
 
   // modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,6 +59,7 @@ const ContactForm: React.FC = () => {
     setIsValidName(false);
     setIsValidEmail(false);
     setIsValidMessage(false);
+    recaptchaRef.current?.reset();
   };
   const [isConfetti, setIsConfetti] = useState(false);
 
@@ -172,6 +174,7 @@ const ContactForm: React.FC = () => {
                 theme="dark"
                 size="normal"
                 hl="en"
+                ref={recaptchaRef}
               />
             </FormControl>
           </Center>
