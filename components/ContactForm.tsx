@@ -26,6 +26,7 @@ const ContactForm: React.FC = () => {
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidMessage, setIsValidMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRecaptchaError, setIsRecaptchaError] = useState(false);
   const MAX_EMAIL_LENGTH = 254;
   const MAX_NAME_LENGTH = 50;
   const MAX_MESSAGE_LENGTH = 2000;
@@ -46,6 +47,7 @@ const ContactForm: React.FC = () => {
   const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
   const handleRecaptchaChange = (value: string | null) => {
     setRecaptchaValue(value);
+    setIsRecaptchaError(!value);
   };
   const recaptchaRef = React.createRef<ReCAPTCHA>();
 
@@ -66,6 +68,12 @@ const ContactForm: React.FC = () => {
   // form submitting
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!recaptchaValue) {
+      setIsRecaptchaError(true);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -167,7 +175,7 @@ const ContactForm: React.FC = () => {
           </FormControl>
 
           <Center>
-            <FormControl id="recaptcha" isRequired>
+            <FormControl id="recaptcha" isRequired isInvalid={isRecaptchaError}>
               <ReCAPTCHA
                 sitekey={RECAPTCHA_SITE_KEY}
                 onChange={handleRecaptchaChange}
@@ -176,12 +184,20 @@ const ContactForm: React.FC = () => {
                 hl="en"
                 ref={recaptchaRef}
               />
+              <FormErrorMessage>
+                Please complete the reCAPTCHA to proceed.
+              </FormErrorMessage>
             </FormControl>
           </Center>
 
           <Button
             type="submit"
-            disabled={!isValidName || !isValidEmail || !isValidMessage}
+            disabled={
+              !isValidName ||
+              !isValidEmail ||
+              !isValidMessage ||
+              !recaptchaValue
+            }
             isLoading={isLoading}
             loadingText="Submitting"
             bgColor="transparent"
