@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   Heading,
   Box,
@@ -11,10 +10,45 @@ import {
   VStack,
   FormErrorMessage,
   useBreakpointValue,
+  Center,
 } from "@chakra-ui/react";
 import SentMessageModal from "./SentMessageModal";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_SITE_KEY = "6Le9-hYlAAAAAHFwlXJ7nKVqG8cM95b8CizeCl6j";
 
 const ContactForm: React.FC = () => {
+  // form validation
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidMessage, setIsValidMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const MAX_EMAIL_LENGTH = 254;
+  const MAX_NAME_LENGTH = 50;
+  const MAX_MESSAGE_LENGTH = 2000;
+  useEffect(() => {
+    setIsValidName(name.trim().length <= MAX_NAME_LENGTH);
+  }, [name]);
+
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsValidEmail(emailRegex.test(email) && email.length <= MAX_EMAIL_LENGTH);
+  }, [email]);
+
+  useEffect(() => {
+    setIsValidMessage(message.trim().length <= MAX_MESSAGE_LENGTH);
+  }, [message]);
+
+  // reCAPTCHA
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
+  };
+
+  // modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -27,17 +61,7 @@ const ContactForm: React.FC = () => {
   };
   const [isConfetti, setIsConfetti] = useState(false);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [isValidName, setIsValidName] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [isValidMessage, setIsValidMessage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const MAX_EMAIL_LENGTH = 254;
-  const MAX_NAME_LENGTH = 50;
-  const MAX_MESSAGE_LENGTH = 2000;
-
+  // form submitting
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -46,7 +70,7 @@ const ContactForm: React.FC = () => {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, message, recaptchaValue }),
       });
 
       if (response.ok) {
@@ -65,19 +89,6 @@ const ContactForm: React.FC = () => {
   };
 
   const buttonWidth = useBreakpointValue({ base: "full", md: "200px" });
-
-  useEffect(() => {
-    setIsValidName(name.trim().length <= MAX_NAME_LENGTH);
-  }, [name]);
-
-  useEffect(() => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    setIsValidEmail(emailRegex.test(email) && email.length <= MAX_EMAIL_LENGTH);
-  }, [email]);
-
-  useEffect(() => {
-    setIsValidMessage(message.trim().length <= MAX_MESSAGE_LENGTH);
-  }, [message]);
 
   return (
     <>
@@ -151,6 +162,18 @@ const ContactForm: React.FC = () => {
               Please enter your input within {MAX_MESSAGE_LENGTH} characters.
             </FormErrorMessage>
           </FormControl>
+
+          <Center>
+            <FormControl id="recaptcha" isRequired>
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={handleRecaptchaChange}
+                theme="dark"
+                size="normal"
+                hl="en"
+              />
+            </FormControl>
+          </Center>
 
           <Button
             type="submit"

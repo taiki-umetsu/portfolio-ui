@@ -7,8 +7,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, message, recaptchaValue } = req.body;
 
+  // check reCAPTCHA
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaValue}`;
+
+  const recaptchaResponse = await fetch(verifyUrl, { method: "POST" });
+  const recaptchaData = await recaptchaResponse.json();
+
+  if (!recaptchaData.success) {
+    return res.status(400).json({ message: "reCAPTCHA validation failed" });
+  }
+
+  // smtp configuration
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
@@ -19,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  // Auto-reply email to user
+  // auto-reply email to user
   const mailToUser = {
     from: process.env.SEND_FROM_EMAIL,
     to: email,
@@ -31,7 +43,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }),
   };
 
-  // Sent email to admin as well
+  // send email to admin as well
   const mailToAdmin = {
     from: process.env.SEND_FROM_EMAIL,
     to: process.env.GMAIL_USER,
