@@ -1,0 +1,12 @@
+You have received a new contact from your portfolio:
+
+------------------------------
+Name: {name}
+
+Email Address: {email}
+
+Message:
+{message}
+------------------------------
+
+https://portfolio.taikiumetsu.dev/

@@ -1,0 +1,17 @@
+Dear {name},
+
+Thank you for contacting me. I have received your message with the following details:
+
+------------------------------
+Name: {name}
+Email Address: {email}
+Message:
+{message}
+------------------------------
+
+I will get back to you as soon as possible.
+
+Best regards,
+
+Taiki Umetsu
+https://portfolio.taikiumetsu.dev/

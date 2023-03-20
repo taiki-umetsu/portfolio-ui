@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
+import { readEmailTemplate } from "@/emailTemplates/emailHelper";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
@@ -23,20 +24,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     from: process.env.SEND_FROM_EMAIL,
     to: email,
     subject: "Thank you for contacting me",
-    text: `
-  Dear ${name},
-
-  Thank you for contacting me. I have received your message with the following details:
-
-  Name: ${name}
-  Email Address: ${email}
-  Message:
-  ${message}
-
-  I will get back to you as soon as possible.
-
-  Best regards,
-`,
+    text: readEmailTemplate("contact", "userEmail.txt", {
+      name,
+      email,
+      message,
+    }),
   };
 
   // Sent email to admin as well
@@ -44,14 +36,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     from: process.env.SEND_FROM_EMAIL,
     to: process.env.GMAIL_USER,
     subject: "New contact from your portfolio",
-    text: `
-  You have received a new contact from your portfolio:
-
-  Name: ${name}
-  Email Address: ${email}
-  Message:
-  ${message}
-`,
+    text: readEmailTemplate("contact", "adminEmail.txt", {
+      name,
+      email,
+      message,
+    }),
   };
 
   try {
