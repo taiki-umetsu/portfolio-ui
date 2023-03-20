@@ -79,7 +79,8 @@ const ContactForm: React.FC = () => {
         setIsModalOpen(true);
       } else {
         setIsLoading(false);
-        alert("Failed to send the message. Please try again.");
+        const responseData = await response.json();
+        alert(`Failed to send the message. ${responseData.message}`);
       }
     } catch (error) {
       console.error(error);
