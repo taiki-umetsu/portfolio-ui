@@ -202,23 +202,15 @@ const Experience = () => {
       </Box>
 
       <Box mb="8">
-        <Box mb="2">
-          <Heading as="h2" size="md">
-            Education
-          </Heading>
-          <Flex justifyContent="space-between">
-            <Text fontStyle="italic" textStyle="p">
-              Yamagata University (Yamagata, Japan)
-            </Text>
-            <Text fontStyle="italic" textStyle="p">
-              Apr 2011 - Mar 2015
-            </Text>
-          </Flex>
-          <Text fontStyle="italic" textStyle="p">
-            Bachelor of Engineering - Mechanical Engineering
-          </Text>
-        </Box>
+        <ExperienceHeader
+          title="Education"
+          company="Yamagata University"
+          location="Yamagata, Japan"
+          start_date="Apr 2011"
+          end_date="Mar 2015"
+        />
         <UnorderedList textStyle="p">
+          <ListItem>Bachelor of Engineering - Mechanical Engineering</ListItem>
           <ListItem>
             Developed a thermal bending test apparatus at a plastic deformation
             laboratory for metallic materials.
