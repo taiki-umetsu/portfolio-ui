@@ -25,7 +25,10 @@ const ExperienceHeader: FC<ExperienceHeaderProps> = ({
       <Heading as="h2" size="md">
         {title}
       </Heading>
-      <Flex justifyContent="space-between">
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        justifyContent="space-between"
+      >
         <Text fontStyle="italic" textStyle="p">
           {company} ({location})
         </Text>
