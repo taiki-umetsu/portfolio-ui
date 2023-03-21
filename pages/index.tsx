@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import {
   Text,
   Link as ChakraLink,
@@ -13,6 +14,9 @@ import ContactForm from "@/components/ContactForm";
 const IndexPage: React.FC = () => {
   return (
     <Layout>
+      <Head>
+        <title>Top | Taiki Umetsu</title>
+      </Head>
       <Box mb="10">
         <VStack align="start" textStyle="p">
           <Heading as="h1">Hi, I&apos;m Taiki &#128075;</Heading>

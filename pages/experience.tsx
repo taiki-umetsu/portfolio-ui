@@ -2,7 +2,6 @@ import Layout from "@/components/Layout";
 import ExperienceHeader from "@/components/ExperienceHeader";
 import {
   Box,
-  Flex,
   Text,
   Heading,
   ListItem,
@@ -10,7 +9,6 @@ import {
   OrderedList,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-
 import Head from "next/head";
 
 const Experience = () => {
