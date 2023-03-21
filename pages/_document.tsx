@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export default function Document() {
   return (
@@ -39,6 +40,7 @@ export default function Document() {
         />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <GoogleAnalytics trackingId="G-6K3R3YVDKZ" />
       </Head>
       <body>
         <Main />
