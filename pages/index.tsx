@@ -10,8 +10,16 @@ import {
 import Layout from "@/components/Layout";
 import SkillsSection from "@/components/SkillsSection";
 import ContactForm from "@/components/ContactForm";
+import About from "@/components/About";
+import { getStaticAboutProps } from "@/lib/getStaticAboutProps";
 
-const IndexPage: React.FC = () => {
+export const getStaticProps = getStaticAboutProps;
+
+interface IndexPageProps {
+  description: string;
+}
+
+const IndexPage: React.FC<IndexPageProps> = ({ description }) => {
   return (
     <Layout>
       <Head>
@@ -19,27 +27,7 @@ const IndexPage: React.FC = () => {
       </Head>
       <Box mb="10">
         <VStack align="start" textStyle="p">
-          <Heading as="h1">Hi, I&apos;m Taiki &#128075;</Heading>
-
-          <Text pb="5">
-            A dedicated backend developer with over 2 years of experience and a
-            passion for problem-solving and creating efficient solutions. I have
-            experience working with Ruby on Rails, JavaScript, SQL, and AWS. I
-            take pride in my ability to learn and adapt quickly, as well as my
-            commitment to delivering high-quality work to my clients and team
-            members. I enjoy dedicating time to learning about new technologies
-            and honing my skills to stay ahead in this rapidly evolving field.
-          </Text>
-
-          <Text pb="5">
-            Apart from my passion for backend development, I love traveling and
-            exploring new cultures. My journey around Asia and my time spent
-            living in Sydney have enriched my life experiences and broadened my
-            perspective. I enjoy taking on challenges, such as reaching the
-            Everest Base Camp in Nepal.
-          </Text>
-
-          <Text>Currently, I&apos;m seeking a job in Vancouver!</Text>
+          <About description={description} />
         </VStack>
         <ChakraLink href="/experience" textStyle="p">
           Read more{" "}
