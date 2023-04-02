@@ -1,25 +1,25 @@
 import React from "react";
 import Head from "next/head";
-import {
-  Text,
-  Link as ChakraLink,
-  Box,
-  Heading,
-  VStack,
-} from "@chakra-ui/react";
+import { Text, Link as ChakraLink, Box, VStack } from "@chakra-ui/react";
 import Layout from "@/components/Layout";
-import SkillsSection from "@/components/SkillsSection";
+import Skill from "@/components/Skill";
 import ContactForm from "@/components/ContactForm";
 import About from "@/components/About";
-import { getStaticAboutProps } from "@/lib/getStaticAboutProps";
+import { getStaticAllProps } from "@/lib/getStaticAllProps";
 
-export const getStaticProps = getStaticAboutProps;
+export const getStaticProps = getStaticAllProps;
 
 interface IndexPageProps {
   description: string;
+  professionalSkills: string[];
+  learningSkills: string[];
 }
 
-const IndexPage: React.FC<IndexPageProps> = ({ description }) => {
+const IndexPage: React.FC<IndexPageProps> = ({
+  description,
+  professionalSkills,
+  learningSkills,
+}) => {
   return (
     <Layout>
       <Head>
@@ -36,29 +36,10 @@ const IndexPage: React.FC<IndexPageProps> = ({ description }) => {
           </Text>
         </ChakraLink>
       </Box>
-      <Box>
-        <Heading as="h1">Skills &#128640;</Heading>
-        <SkillsSection
-          skills={[
-            "Ruby",
-            "Ruby on Rails",
-            "JavaScript",
-            "jQuery",
-            "MySQL",
-            "Git",
-            "AWS",
-            "Docker",
-            "SQL data analysis",
-            "batch processes development",
-            "routine tasks automation",
-            "API Integration",
-            "API development",
-            "code reviews",
-          ]}
-        />
-        <Heading as="h2">Learning...</Heading>
-        <SkillsSection skills={["Go", "React", "Next.js", "ChatGPT"]} />
-      </Box>
+      <Skill
+        professionalSkills={professionalSkills}
+        learningSkills={learningSkills}
+      />
       <ContactForm />
     </Layout>
   );

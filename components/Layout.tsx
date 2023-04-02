@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import Head from "next/head";
 import { Box, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Global, css } from "@emotion/react";
 import { menuTheme } from "./Header";
