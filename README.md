@@ -7,7 +7,7 @@ URL: https://portfolio.taikiumetsu.dev/<br>
 <br>
 <img src="public/images/portfolio-experience.png" width="500px"><br>
 
-# Build with
+# Built with
 
 - Next.js
 - TypeScript
@@ -20,7 +20,7 @@ URL: https://portfolio.taikiumetsu.dev/<br>
 
 # API server
 
-- Build with Ruby on Rails
+- Built with Ruby on Rails
 - GitHub: https://github.com/taiki-umetsu/portfolio_api
 - API Document: https://portfolio-api.taikiumetsu.dev/api-docs/index.html<br>
   <br>
@@ -28,7 +28,7 @@ URL: https://portfolio.taikiumetsu.dev/<br>
 
 # Admin panel
 
-- Build with Typescript, Next.js, react-admin
+- Built with Typescript, Next.js, react-admin
 - GitHub: https://github.com/taiki-umetsu/portfolio-admin
 - URL: https://portfolio-admin.taikiumetsu.dev/<br>
   <br>
