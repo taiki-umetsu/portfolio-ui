@@ -72,25 +72,14 @@ const Header: FC = () => {
     >
       <ChakraLink href="/" _hover={{ textDecoration: "none" }}>
         <Flex alignItems="center">
-          <Box
-            w="70px"
-            h="70px"
-            borderRadius="50%"
-            borderWidth="1px"
-            borderColor="#8ac8fe"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Image
-              src="/images/top-icon.png"
-              alt="icon"
-              boxSize="60px"
-              borderRadius="full"
-              objectFit="cover"
-              objectPosition="center"
-            />
-          </Box>
+          <Image
+            src="/images/top-icon-60px.png"
+            alt="icon"
+            boxSize="60px"
+            borderRadius="full"
+            objectFit="cover"
+            objectPosition="center"
+          />
           <Text
             ml={2}
             fontSize="md"
