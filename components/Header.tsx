@@ -83,7 +83,7 @@ const Header: FC = () => {
             alignItems="center"
           >
             <Image
-              src="/images/top-icon.jpg"
+              src="/images/top-icon.png"
               alt="icon"
               boxSize="60px"
               borderRadius="full"
