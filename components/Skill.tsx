@@ -15,7 +15,7 @@ const Skill: React.FC<SkillProps> = ({
     <Box>
       <Heading as="h1">Skills &#128640;</Heading>
       <SkillsSection skills={professionalSkills} />
-      <Heading as="h2">Learning</Heading>
+      <Heading as="h2">Currently Exploring</Heading>
       <SkillsSection skills={learningSkills} />
     </Box>
   );
